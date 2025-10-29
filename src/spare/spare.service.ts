@@ -41,11 +41,31 @@ private spareRepository : Repository<Spareentity>){}
   return { spare, message: 'Spare part updated Successfully'};
  }
 
+//PRICE UPDATE METHOD
+
+ //update price of spare part by id
+ async updatePrice(id: string, price: number) {
+
+  //Find the spare part by id
+  const spare = await this.spareRepository.findOne({ where: { id } });
+
+  if (!spare) throw new NotFoundException ('Spare part not found');
  
+
+ //update the price
+ spare.price = price;
+ 
+ //save to database
+  return await this.spareRepository.save(spare);
+}
+ //END OF UPDATE PRICE METHOD
+
+
  //Delete spare parts by id
   async Delete(id: string,){
   const spare = await this.spareRepository.delete(id);
   if (!spare) throw new NotFoundException ('spare part not found');
   return {spare, message: 'Spare part deleted'}
+  
   }
 }

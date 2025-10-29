@@ -41,7 +41,7 @@ private readonly UserRepository : Repository<UserEntity>,){}
    async delete(id: number) {
   const user = await this.UserRepository.delete(id);
 
-  if (!user) throw new NotFoundException(`User not found`); 
+  if (!user) throw new NotFoundException ('User not found'); 
   return {message: 'User deleted successfully'};
   }
 }
